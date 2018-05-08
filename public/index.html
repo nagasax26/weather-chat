@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Weather Chat</title>
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylsheet/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Weather Chat</h1>
+        <div class="alert" role="alert">
+            <h4 class="alert-heading"></h4>
+        </div>
+        <form id="form-city">
+            <div class="input-group">
+
+                <input type="text" class="form-control" pattern="([a-z ]+)" title="Please enter city in small letters" name="city" placeholder="Enter City"
+                    required>
+                <div class="input-group-append">
+                    <input class="btn btn-primary btn-temp" type="submit" value="Get Temp">
+                    <!--Get Temp</button>-->
+                </div>
+            </div>
+        </form>
+
+            <div class="row mt-2">
+                <div class="col-sm-4">
+                    <div>
+                        <button id="btnSortCity" class="btn btn-primary form-control">Sort By City<span class="order fa fa-angle-down fa-2x"></span></button> 
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                        <button id="btnSortTemp" class="btn btn-dark form-control">Sort By Temp<span class="order fa fa-angle-down fa-2x"></span></button> 
+                </div>
+                <div class="col-sm-4">
+                        <button id="btnSortDate" class="btn btn-primary form-control">Sort By Date<span class="order fa fa-angle-down fa-2x"></span></button> 
+                </div>
+            </div>
+           
+
+        <div class="divider">
+            <a href='https://www.freepik.com/free-vector/rain-background-and-yellow-umbrella_1228939.htm'>Designed by Freepik</a>
+        </div>
+
+        <div class="weather-list">
+
+        </div>
+    </div>
+
+    <script src="jquery/dist/jquery.min.js"></script>
+    <script id="weather-layout" type="text/x-handlebars-template">
+        <div class="weather" data-cityKey="{{cityKey}}">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-11">
+                        <span class="title">{{city}}, {{country}}</span>
+                    </div>
+                    <div class="col-sm-1 text-right">
+                        <i class="icon fa fa-trash-o" aria-hidden="true"></i>
+                    </div>
+                </div>
+
+                <!--for the weatherList in currentWeather-->
+                {{#each weatherList}}
+                <p class="lead-style">
+                    <img src="https://developer.accuweather.com/sites/default/files/{{icon}}-s.png" onerror="this.src='img/icons/{{icon}}-s.png'" alt="{{des}}">
+                    <span>{{cel}}
+                        <sup>&deg;C</sup> / {{fah}}
+                        <sup>&deg;F</sup>
+                    </span> at {{date}}</p>
+                    {{#if comments}}
+                <div class="comments">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <span class="title-comment">Comments:</span>
+                        </div>
+                        <div class="col-sm-10 text-right">
+                            {{#each comments}}
+                            <div>
+                                <div class="remove">
+                                    <p class='comment' data-id='{{id}}'>{{comment}}</p>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+                {{/each}}
+
+                <!--for current weather-->
+                <p class="lead-style">
+                    <img src="https://developer.accuweather.com/sites/default/files/{{currentWeather.icon}}-s.png"  onerror="this.src='img/icons/{{currentWeather.icon}}-s.png'"  alt="{{des}}">
+                    <span>{{currentWeather.cel}}
+                        <sup>&deg;C</sup> / {{currentWeather.fah}}
+                        <sup>&deg;F</sup>
+                    </span> at {{currentWeather.date}}</p>
+                <div class="comments">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <span class="title-comment">Comments:</span>
+                        </div>
+                        <div class="col-sm-10 text-right">
+                            {{#each currentWeather.comments}}
+                            <div>
+                                <div class="remove">
+                                    <p class='comment' data-id='{{id}}'>{{comment}}</p>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+
+                <form class="form-comment">
+                    <div class="input-group mt-2">
+                        <input type="text" class="form-control" name="comment" placeholder="Enter Comment" required>
+                        <div class="input-group-append">
+                            <input class="btn-comment btn btn-success" type="submit" value="Comment">
+                            <!--Comment</button>-->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </script>
+    <script src="handlebars/dist/handlebars.min.js"></script>
+    <script src="javascript/handlebars-helpers.js"></script>
+    <script src="javascript/script.js"></script>
+</body>
+
+</html>
