@@ -28,11 +28,8 @@ var onPageLoad = function () {
     items = getFromLocalStorage();
     count = getCountFromLocalStorage();
 
-    for (var i in items) {
-        renderItem(i);
-    }
+    renderAll();
 };
-
 
 //hiding the alert div
 $('.alert').addClass('hide');
@@ -77,7 +74,7 @@ var addItem = function (_data) {
         fah: _data[0].Temperature.Imperial.Value,
         date: formatDate(),
         desc: _data[0].WeatherText,
-        icon: _data[0].WeatherIcon < 10 ? '0'+_data[0].WeatherIcon : _data[0].WeatherIcon,
+        icon: _data[0].WeatherIcon < 10 ? '0' + _data[0].WeatherIcon : _data[0].WeatherIcon,
 
         comments: []
     };
@@ -102,7 +99,7 @@ var updateItem = function (data, index) {
     items[index].currentWeather.fah = data[0].Temperature.Imperial.Value;
     items[index].currentWeather.date = formatDate();
     items[index].currentWeather.desc = data[0].WeatherText;
-    items[index].currentWeather.icon = data[0].WeatherIcon < 10 ? '0'+data[0].WeatherIcon : data[0].WeatherIcon;
+    items[index].currentWeather.icon = data[0].WeatherIcon < 10 ? '0' + data[0].WeatherIcon : data[0].WeatherIcon;
     items[index].currentWeather.comments = [];
 };
 
@@ -172,45 +169,45 @@ var getDataWeather = function (cityKey) {
     });
 };
 
-var  sortByCityAsc = function(){
-    items.sort(function(item1, item2){
-        return item1.city > item2.city; 
+var sortByCityAsc = function () {
+    items.sort(function (item1, item2) {
+        return item1.city > item2.city;
     });
 };
 
-var  sortByCityDsc = function(){
-    items.sort(function(item1, item2){
-        return item1.city < item2.city; 
+var sortByCityDsc = function () {
+    items.sort(function (item1, item2) {
+        return item1.city < item2.city;
     });
 };
 
-var  sortByTempretureAsc = function(){
-    items.sort(function(item1, item2){
-        return item1.currentWeather.cel > item2.currentWeather.cel; 
+var sortByTempretureAsc = function () {
+    items.sort(function (item1, item2) {
+        return item1.currentWeather.cel > item2.currentWeather.cel;
     });
 };
 
-var  sortByTempretureDsc = function(){
-    items.sort(function(item1, item2){
-        return item1.currentWeather.cel < item2.currentWeather.cel; 
+var sortByTempretureDsc = function () {
+    items.sort(function (item1, item2) {
+        return item1.currentWeather.cel < item2.currentWeather.cel;
     });
 };
 
-var  sortByDateAsc = function(){
-    items.sort(function(item1, item2){
+var sortByDateAsc = function () {
+    items.sort(function (item1, item2) {
         var date1 = new Date(item1.currentWeather.date);
         var date2 = new Date(item2.currentWeather.date);
 
-        return date1 > date2; 
+        return date1 > date2;
     });
 };
 
-var  sortByDateDsc = function(){
-    items.sort(function(item1, item2){
+var sortByDateDsc = function () {
+    items.sort(function (item1, item2) {
         var date1 = new Date(item1.currentWeather.date);
         var date2 = new Date(item2.currentWeather.date);
 
-        return date1 < date2; 
+        return date1 < date2;
     });
 };
 
@@ -285,7 +282,7 @@ $('.weather-list').on('click', '.btn-comment', function (event) {
     saveToLocalStorage();
     count++;
     saveCountToLocalStorage();
-    
+
     $(this).closest('form').trigger('reset');
 });
 
@@ -325,42 +322,59 @@ $('.weather-list').on('click', '.comment', function () {
 
 });
 
+
 //sorting
-$('#btnSortCity').click(function(){
+var previosTarget = null;
+$('#btnSortCity').click(function () {
+    if (previosTarget !== this) {
+        $(this).closest('.col-sm-4').siblings().find('button').removeClass('active');
+        $(this).toggleClass('active');
+        previosTarget = this;
+    }
     $(this).find('span').toggleClass('fa-angle-down fa-angle-up');
-    if( $(this).find('span').hasClass('fa-angle-down')){
+    if ($(this).find('span').hasClass('fa-angle-down')) {
         sortByCityDsc();
         renderAll();
     }
 
-    if($(this).find('span').hasClass('fa-angle-up')){
+    if ($(this).find('span').hasClass('fa-angle-up')) {
         sortByCityAsc();
         renderAll();
     }
 
 });
 
-$('#btnSortTemp').click(function(){
+$('#btnSortTemp').click(function () {
+    if (previosTarget !== this) {
+        $(this).closest('.col-sm-4').siblings().find('button').removeClass('active');
+        $(this).toggleClass('active');
+        previosTarget = this;
+    }
     $(this).find('span').toggleClass('fa-angle-down fa-angle-up');
-    if( $(this).find('span').hasClass('fa-angle-down')){
+    if ($(this).find('span').hasClass('fa-angle-down')) {
         sortByTempretureDsc();
         renderAll();
     }
 
-    if($(this).find('span').hasClass('fa-angle-up')){
+    if ($(this).find('span').hasClass('fa-angle-up')) {
         sortByTempretureAsc();
         renderAll();
     }
 });
 
-$('#btnSortDate').click(function(){
+$('#btnSortDate').click(function () {
+    if (previosTarget !== this) {
+        $(this).closest('.col-sm-4').siblings().find('button').removeClass('active');
+        $(this).toggleClass('active');
+        previosTarget = this;
+    }
     $(this).find('span').toggleClass('fa-angle-down fa-angle-up');
-    if( $(this).find('span').hasClass('fa-angle-down')){
+    if ($(this).find('span').hasClass('fa-angle-down')) {
         sortByDateDsc();
         renderAll();
     }
 
-    if($(this).find('span').hasClass('fa-angle-up')){
+    if ($(this).find('span').hasClass('fa-angle-up')) {
         sortByDateAsc();
         renderAll();
     }

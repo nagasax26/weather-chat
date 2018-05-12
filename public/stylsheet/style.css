@@ -3,7 +3,6 @@ body {
     /* background: linear-gradient(to right, rgb(2, 17, 29), rgb(3, 123, 181), rgb(2, 17, 29)); */
 }
 
-
 .hide{
     display: none;
 }
@@ -14,14 +13,14 @@ body {
     right: 110px;
 }
 
-h1 {
+.container h1 {
     background: linear-gradient(to right, rgb(57, 106, 252), rgb(41, 72, 255));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
-.divider{
+.container .divider{
     height: 200px;
     /* background-image: linear-gradient(to top, #00c6fb 0%, #005bea 100%); */
     background: url(../img/137262-OSVS0O-885.jpg) no-repeat;
@@ -32,7 +31,8 @@ h1 {
     position: relative;
 }
 
-.divider a:link,.divider a:visited{
+.container .divider a:link,
+.container .divider a:visited{
     color:white;
     font-size: 24px;
     position: absolute;
@@ -52,37 +52,34 @@ h1 {
     margin-bottom: 40px;
 }
 
-.title{
+.weather .title{
     font-size: 20px;
     text-transform: capitalize;
 }
 
-.title-comment{
+.weather .title-comment{
     font-size: 20px;
     margin-left: 26px;
     text-transform: capitalize;
 }
 
-.icon {
+.weather .icon {
     color:rgba(0,0,0,.3);
     font-size: 26px;
     cursor: pointer;
 }
 
-.icon:hover{
+.weather .icon:hover{
     color: red;
 }
 
-
-
-p.lead-style{
+.weather p.lead-style{
     font-style: italic;
     font-size: 24px;
     font-weight: 300;
 }
 
-
-.lead-style span{
+.weather .lead-style span{
     font-size: 30px;
     font-weight: 700;
 
@@ -92,18 +89,18 @@ p.lead-style{
     color: transparent;
 }
 
-sup{
+.weather sup{
     background: linear-gradient(to right, rgb(22, 160, 133), rgb(244, 208, 63));
     -webkit-background-clip:text;
     background-clip: text;    
     color: transparent;
 }
 
-.comments .remove:not(:last-child){
+.weather .comments .remove:not(:last-child){
     margin-bottom: 5px; 
 }
 
-.comment {
+.weather .comments .comment {
     background:  #52c234;
     -webkit-background-clip:text;
     background-clip: text;    
@@ -122,11 +119,11 @@ sup{
     position: relative;
 }
 
-.comments:last-of-type .comment:hover{
+.weather .comments:last-of-type .comment:hover{
     cursor: pointer;
 }
 
-.comment::before{
+.weather .comment::before{
     content: '';
     display: none;
     width: 100%;
@@ -139,11 +136,10 @@ sup{
     top:12px;
 }
 
-.remove{
+.weather .comments .remove{
     display: inline-block;
     padding-right: 23px;
 }
-
 
 .weather .comments:last-of-type .remove:hover .comment::before{
     display: block;
@@ -155,4 +151,3 @@ sup{
 .form-control:focus{
     box-shadow: none;
 }
-
