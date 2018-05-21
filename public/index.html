@@ -11,9 +11,7 @@
 <body>
     <div class="container">
         <h1>Weather Chat</h1>
-        <div class="alert" role="alert">
-            <h4 class="alert-heading"></h4>
-        </div>
+        <div class="alert alert-danger" role="alert"></div>
         <form id="form-city">
             <div class="input-group">
                 <input type="text" class="form-control" pattern="([a-z ]+)" title="Please enter city in small letters" name="city" placeholder="Enter City"
@@ -24,19 +22,19 @@
                 </div>
             </div>
         </form>
-        <div class="row mt-2">
+        <div id="sortBy" class="row mt-2">
             <div class="col-sm-4">
-                <button id="btnSortCity" class="btn btn-primary btn-block">Sort By City
+                <button data-sort='city' class="btn btn-primary btn-block">Sort By City
                     <span class="order fa fa-angle-down fa-2x"></span>
                 </button>
             </div>
             <div class="col-sm-4">
-                <button id="btnSortTemp" class="btn btn-primary btn-block">Sort By Temp
+                <button data-sort='temp' class="btn btn-primary btn-block">Sort By Temp
                     <span class="order fa fa-angle-down fa-2x"></span>
                 </button>
             </div>
             <div class="col-sm-4">
-                <button id="btnSortDate" class="btn btn-primary btn-block">Sort By Date
+                <button data-sort='date' class="btn btn-primary btn-block">Sort By Date
                     <span class="order fa fa-angle-down fa-2x"></span>
                 </button>
             </div>
@@ -51,6 +49,13 @@
     </div>
 
     <script src="jquery/dist/jquery.min.js"></script>
+    <script id="comment-layout" type="text/x-handlebars-template">
+        <div>
+            <div class="remove">
+                <p class='comment' data-id={{count}>{{comment}</p>
+            </div>
+        </div>
+    </script>
     <script id="weather-layout" type="text/x-handlebars-template">
         <div class="weather" data-cityKey="{{cityKey}}">
             <div class="container">
@@ -128,7 +133,7 @@
         </div>
     </script>
     <script src="handlebars/dist/handlebars.min.js"></script>
-    <script src="javascript/handlebars-helpers.js"></script>
+    <script src="javascript/weather.js"></script>
     <script src="javascript/script.js"></script>
 </body>
 
